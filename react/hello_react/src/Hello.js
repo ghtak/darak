@@ -9,20 +9,24 @@ function Hello({children}){
 }
 */
 
-function Hello(props) {
-    const style = {
-        border: '2px solid black',
-        padding: '16px',
-    };
+function Hello({ color, name, isSpecial, children }) {
+
     return (
-        <div style={style}>
+        <div style={{ color }}>
+            {/*
+                { ==> js expression
+                    {color} ==> object
+                }
+            */}
+            {isSpecial ? <b>*</b> : null}
             <p>Hello React</p>
-            {props.children}
-            <p>name : {props.name}</p>
+            {children}
+            <p>name : {name}</p>
         </div>);
 }
 
 Hello.defaultProps = {
+    color: "grey",
     name: "default name"
 }
 
