@@ -4,11 +4,13 @@ import Wrapper from './wrapper';
 import Counter from './Counter';
 import InputSample from './InputSample';
 import InputsSample from './InputsSample';
+import UserList from './UserList';
 
 function App() {
   const name = 'react';
   return (
     <div>
+      <UserList></UserList>
       <InputsSample></InputsSample>
       <InputSample></InputSample>
       <Counter></Counter>
