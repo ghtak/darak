@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 
 
 function User({ user, onRemove, onToggle }) {
+    /*
     useEffect(() => {
         console.log("mount " + user.username);
         return () => {
@@ -12,6 +13,7 @@ function User({ user, onRemove, onToggle }) {
     //) // 리렌더링 될때마다 호출
     //,[]) // 최초 마운트시만 호출
     ,[user])// user 값이 변화될때 호출
+    */
     return (
         <div>
             <b
