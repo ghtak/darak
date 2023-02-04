@@ -28,17 +28,20 @@ function App() {
     {
       id: 1,
       username: 'ghtak',
-      email: 'ghtak@gmail.com'
+      email: 'ghtak@gmail.com',
+      active: true
     },
     {
       id: 2,
       username: 'tester',
-      email: 'tester@example.com'
+      email: 'tester@example.com',
+      active: false
     },
     {
       id: 3,
       username: 'liz',
-      email: 'liz@example.com'
+      email: 'liz@example.com',
+      active: false
     }
   ])
   const nextId = useRef(4);
@@ -61,6 +64,17 @@ function App() {
       users.filter(user => user.id !== id)
     );
   }
+  const onToggle = (id) => {
+    setUsers(
+      users.map(user => {
+        return user.id === id ?
+          {
+            ...user,
+            active: !user.active
+          } : user
+      })
+    )
+  }
   return (
     <div>
       <CreateUser
@@ -69,7 +83,11 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       ></CreateUser>
-      <UserList users={users} onRemove={onRemove}></UserList>
+      <UserList
+        users={users}
+        onRemove={onRemove}
+        onToggle={onToggle}
+      ></UserList>
       <InputsSample></InputsSample>
       <InputSample></InputSample>
       <Counter></Counter>
