@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext, useCallback } from "react";
+import { UserDispatch } from "./App";
 
 
-
-const User = React.memo(function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user }) {
     /*
     useEffect(() => {
         console.log("mount " + user.username);
@@ -14,6 +14,19 @@ const User = React.memo(function User({ user, onRemove, onToggle }) {
     //,[]) // 최초 마운트시만 호출
     ,[user])// user 값이 변화될때 호출
     */
+    const dispatch = useContext(UserDispatch);
+    const onToggle = useCallback(id => {
+        dispatch({
+            type: 'TOGGLE_USER',
+            id
+        })
+    })
+    const onRemove = useCallback(id => {
+        dispatch({
+            type: 'REMOVE_USER',
+            id
+        })
+    })
     return (
         <div>
             <b
@@ -29,16 +42,14 @@ const User = React.memo(function User({ user, onRemove, onToggle }) {
     )
 });
 
-function UserList({ users, onRemove, onToggle }) {
+function UserList({ users }) {
     return (
         <div>
             UserList
             {
                 users.map(user =>
                 (<User user={user}
-                    key={user.id}
-                    onRemove={onRemove}
-                    onToggle={onToggle} />))
+                    key={user.id} />))
                 /*users.map((user, index) => { return <User user={user} key={index}/>})*/
             }
         </div>

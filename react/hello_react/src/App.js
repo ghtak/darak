@@ -7,6 +7,7 @@ import InputsSample from './InputsSample';
 import UserList from './UserList';
 import { useCallback, useMemo, useReducer, useRef, useState } from 'react';
 import CreateUser from './CreateUser';
+import React from 'react';
 
 function countActiveUsers(users) {
   console.log("counting users")
@@ -53,31 +54,38 @@ function reducer(state, action) {
     case 'CREATE_USER':
       return {
         ...state,
+        inputs: {
+          username: '',
+          email: '',
+        },
         users: state.users.concat(action.user)
       }
     case 'TOGGLE_USER':
       return {
         ...state,
         users: state.users.map(
-          user=>user.id === action.id ? {...user, active: !user.active}: user
+          user => user.id === action.id ? { ...user, active: !user.active } : user
         )
       }
     case 'REMOVE_USER':
       return {
         ...state,
         users: state.users.filter(
-          user=>user.id !== action.id)
+          user => user.id !== action.id)
       }
     default:
       return state;
   }
 }
 
+export const UserDispatch = React.createContext(null);
+
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const { inputs: { username, email } } = state;
   const { users } = state;
+  /*
   const nextId = useRef(users.length);
 
   const onChange = useCallback((e) => {
@@ -100,7 +108,7 @@ function App() {
     })
     nextId.current += 1;
   }, [username, email])
-
+  
   const onToggle = useCallback((id) => {
     dispatch({
       type: 'TOGGLE_USER',
@@ -115,21 +123,19 @@ function App() {
     })
   })
 
-
+  */
 
   return (
     <div>
-      <CreateUser
-        username={username}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}></CreateUser>
-      <UserList
-        users={users}
-        onRemove={onRemove}
-        onToggle={onToggle}
-      ></UserList>
-      <div>활성 사용자수 : 0</div>
+      <UserDispatch.Provider value={dispatch}>
+        <CreateUser
+          username={username}
+          email={email}></CreateUser>
+        <UserList
+          users={users}
+        ></UserList>
+        <div>활성 사용자수 : 0</div>
+      </UserDispatch.Provider>
     </div>
   )
   /*
