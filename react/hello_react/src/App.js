@@ -81,56 +81,18 @@ function reducer(state, action) {
 export const UserDispatch = React.createContext(null);
 
 function App() {
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const { inputs: { username, email } } = state;
   const { users } = state;
-  /*
-  const nextId = useRef(users.length);
-
-  const onChange = useCallback((e) => {
-    const { name, value } = e.target;
-    dispatch({
-      type: 'CHANGE_INPUT',
-      username,
-      value
-    })
-  }, [])
-
-  const onCreate = useCallback(() => {
-    dispatch({
-      type: 'CREATE_USER',
-      user: {
-        id: nextId.current,
-        username,
-        email
-      }
-    })
-    nextId.current += 1;
-  }, [username, email])
-  
-  const onToggle = useCallback((id) => {
-    dispatch({
-      type: 'TOGGLE_USER',
-      id
-    })
-  })
-
-  const onRemove = useCallback((id) => {
-    dispatch({
-      type: 'REMOVE_USER',
-      id
-    })
-  })
-
-  */
-
+  const userlength = users.length + 1;
   return (
     <div>
       <UserDispatch.Provider value={dispatch}>
         <CreateUser
           username={username}
-          email={email}></CreateUser>
+          email={email}
+          userlength={userlength}
+          ></CreateUser>
         <UserList
           users={users}
         ></UserList>
@@ -138,110 +100,6 @@ function App() {
       </UserDispatch.Provider>
     </div>
   )
-  /*
-  const name = 'react';
-
-  const [inputs, setInputs] = useState({
-    username: '',
-    email: ''
-  });
-  const { username, email } = inputs;
-  const onChange = useCallback(
-    e => {
-      const { name, value } = e.target;
-      setInputs(
-        inputs => ({
-          ...inputs,
-          [name]: value,
-        }))
-    },
-    []);
-
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: 'ghtak',
-      email: 'ghtak@gmail.com',
-      active: true
-    },
-    {
-      id: 2,
-      username: 'tester',
-      email: 'tester@example.com',
-      active: false
-    },
-    {
-      id: 3,
-      username: 'liz',
-      email: 'liz@example.com',
-      active: false
-    }
-  ])
-  const nextId = useRef(4);
-  const onCreate = useCallback(
-    () => {
-      const user = {
-        id: nextId.current,
-        username: username,
-        email: email
-      };
-      setUsers(users => users.concat(user));
-      setInputs({
-        username: '',
-        email: '',
-      })
-      nextId.current += 1;
-    }, [inputs]);
-
-  const onRemove = useCallback(
-    id => {
-      setUsers(users =>
-        users.filter(user => user.id !== id)
-      );
-    },
-    []);
-
-  const onToggle = useCallback(
-    id => {
-      setUsers(users => (
-        users.map(user => {
-          return user.id === id ?
-            {
-              ...user,
-              active: !user.active
-            } : user
-        })))
-    },
-    []);
- 
-  //const count = countActiveUsers(users);
-  const count = useMemo(() => countActiveUsers(users), [users]);
-  return (
-    <div>
-      
-      <CreateUser
-        username={username}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}
-      ></CreateUser>
-      <UserList
-        users={users}
-        onRemove={onRemove}
-        onToggle={onToggle}
-      ></UserList>
-      <div>활성사용자 수 : {count}</div>
-      <InputsSample></InputsSample>
-      <InputSample></InputSample>
-      <Counter></Counter>
-      <Wrapper>
-        <Hello />
-        <Hello color="red" name={name} isSpecial={true}></Hello>
-        <Hello color="yellow" name={name} isSpecial></Hello>
-        <div className='gray-box'></div>
-      </Wrapper>
-    </div>
-  ); */
 }
 
 export default App;

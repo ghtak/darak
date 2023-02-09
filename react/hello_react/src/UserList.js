@@ -36,7 +36,8 @@ const User = React.memo(function User({ user }) {
                 }}
                 onClick={() => onToggle(user.id)}
             >{user.username}</b>
-            <span>{user.email}</span>
+            <span> {user.email}</span>
+            <span> {user.id}</span>
             <button onClick={() => onRemove(user.id)}>삭제</button>
         </div>
     )
