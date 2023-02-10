@@ -85,6 +85,9 @@ function App() {
   const { inputs: { username, email } } = state;
   const { users } = state;
   const userlength = users.length + 1;
+  const active = useMemo(
+    () => countActiveUsers(users), [users]
+  )
   return (
     <div>
       <UserDispatch.Provider value={dispatch}>
@@ -92,11 +95,11 @@ function App() {
           username={username}
           email={email}
           userlength={userlength}
-          ></CreateUser>
+        ></CreateUser>
         <UserList
           users={users}
         ></UserList>
-        <div>활성 사용자수 : 0</div>
+        <div>활성 사용자수 : {active}</div>
       </UserDispatch.Provider>
     </div>
   )
