@@ -18,7 +18,10 @@ function Hello({ color, name, isSpecial, children }) {
                     {color} ==> object
                 }
             */}
-            {isSpecial ? <b>*</b> : null}
+            {
+            //isSpecial ? <b>*</b> : null
+                isSpecial && <b>*</b>
+            }
             <p>Hello React</p>
             {children}
             <p>name : {name}</p>

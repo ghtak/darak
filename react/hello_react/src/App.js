@@ -90,6 +90,7 @@ function App() {
   )
   return (
     <div>
+      <Hello></Hello>
       <UserDispatch.Provider value={dispatch}>
         <CreateUser
           username={username}
