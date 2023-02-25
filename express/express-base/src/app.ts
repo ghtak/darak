@@ -1,7 +1,5 @@
-import express, { Request, Response, NextFunction } from 'express'
-import config from '../config'
+import express from 'express'
 
 const app = express()
 
-console.log(config.PORT);
-
+export default app;
